@@ -1,0 +1,26 @@
+name: Maven CI Build
+
+on:
+  push:
+    branches:
+      - main  # Runs the workflow on pushes to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Using the latest Ubuntu environment
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Fetch the latest code
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Maven
+        run: sudo apt-get install -y maven  # Install Maven
+
+      - name: Run Maven Clean
+        run: mvn clean  # Runs the clean command to remove old build files
